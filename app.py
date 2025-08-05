@@ -1,10 +1,10 @@
 import streamlit as st
 import fitz 
 import re
-st.title("Extract Text From PDF")
+st.title("Resume Parsing (Extract Text)")
 file=st.file_uploader("Upload A PDF",type=['pdf','docx'])
 if file is not None:
-    doc=fitz.open(file)
+    doc=fitz.open(stream=file.read(), filetype="pdf")
     for page in doc:
         text=page.get_text()
         st.subheader("Extracted Text")
