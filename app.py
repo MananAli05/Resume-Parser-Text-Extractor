@@ -19,9 +19,7 @@ if file is not None:
         st.subheader("Found Phone Numbers")
         st.write(found_phones)
         skills = ['Python', 'Java', 'JavaScript', 'C++', 'SQL','Django', 'Flask', 'React', 'Node.js','Machine Learning', 'Deep Learning','Html', 'CSS', 'Bootstrap','Power BI', 'Tableau']
-        for skill in skills:
-            if skill in text:
-                st.write(f"Found skill: {skill}")
+        found_skills = [skill for skill in skills if skill.lower() in text.lower()]
         st.title("Education and Experience")
         education= r'\b(Matriculation|Intermediate|Bachelor|Master|PhD|BSc|MSc|B.E.|B.Tech|M.Tech)\b'
         experience = r'\b(\d+ years? of experience|fresher|entry-level)\b'
@@ -31,4 +29,13 @@ if file is not None:
         st.write(found_education)
         st.subheader("Found Experience")
         st.write(found_experience)
+        parsed_data = {
+        "emails": found_emails,
+        "phone_numbers": found_phones,
+        "skills": found_skills,
+        "education": found_education,
+        "experience": found_experience
+    }
 
+    st.subheader("Parsed Information (Structured)")
+    st.json(parsed_data)
